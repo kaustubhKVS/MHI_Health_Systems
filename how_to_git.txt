@@ -1,0 +1,43 @@
+> > git init
+
+> > git status
+
+> > git clone
+
+> > git checkout -b <NameofBranch>
+
+> > git add .
+
+> > git diff <filename>
+
+#### How to PR
+
+> > git checkout -b <NewBranch>
+> > git add .
+> > git commit -m " Message for the commit "
+> > git log
+> > git push origin <NewBranch>
+
+// delete branch locally
+
+> > git branch -d <localBranchName>
+
+// delete branch remotely
+
+> > git push origin --delete <remoteBranchName>
+
+#sync entire local repo with remote repo
+
+> > git fetch origin && git reset --hard origin/master && git clean -f -d
+
+# for private repos
+
+> > git fetch origin && git reset --hard origin && git clean -f -d
+
+#### Git submodule
+
+> > git submodule add https://github.com/msadoghi/nexres/tree/54e936cbbea9259a284ae10bdc5cc912c456b495
+
+> > git config submodule.recurse true
+
+> > git submodule update --init
