@@ -10,6 +10,10 @@ This project is built using FARM Stack:
 
 - Databases: MongoDB (Tentative)
 
+- Block Object (Media) Dataset: Amazon S3 (Tentative) / Infura IPFS
+
+Please follow a proper ettiquete for github source control. For starters see how_to_git.txt in the repo and see this https://softwareengineering.stackexchange.com/questions/180959/what-is-proper-etiquette-and-recommended-github-workflow-for-simultaneously-cont
+
 ### Install FastAPI
 
 We will be using FastAPI as the backend framework.
@@ -35,7 +39,7 @@ Create an account on MongoDB Atlas and download the following:
 - MongoDB Shell
 - MongoDB Community Server
 
-#### To sun the server db, see backend readme.
+#### To run the server db, see backend readme.
 
 Connect the server and atlas using the URI provided in the connection tab
 
