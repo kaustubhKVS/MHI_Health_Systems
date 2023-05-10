@@ -4,27 +4,22 @@ import axios from "axios";
 
 import "./App.css";
 import Home from "./components/Home";
+import Navbar from "./components/Navbar";
+import CreateImagePrediction from "./components/CreateImagePrediction";
+import NotFound from "./components/NotFound";
 
 function App() {
   return (
     <Router>
       <div className="App">
-        {/* <Navbar></Navbar>
+        <Navbar />
         <div className="content">
           <Routes>
-            <Route exact path="/" element={<Home />} />
-            <Route exact path="/create" element={<CreateNFT />} />
-            <Route
-              exact
-              path="/explore"
-              element={<NftView nftList={nftList} />}
-            />
-            <Route path="/nft_details/?NFT:nft_id" element={<NftDetails />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/create" element={<CreateImagePrediction />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </div> */}
-        {/* <h1>hello</h1> */}
-        <Home />
+        </div>
       </div>
     </Router>
   );
