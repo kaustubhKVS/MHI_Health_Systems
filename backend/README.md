@@ -14,7 +14,7 @@ To run the development server with hot-reload:
 
 #### `conda activate mhi_few_shot`
 
-#### `uvicorn test:app --reload`
+#### `uvicorn main:app --reload`
 
 #### `sudo systemctl start mongod`
 
