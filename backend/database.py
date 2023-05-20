@@ -1,13 +1,10 @@
-import motor.motor_asyncio
 import boto3
+import motor.motor_asyncio
 
-
-from db_config import (
-    db_root_url
-)
-
-from aws_config import (aws_account_access_key,
-                        aws_account_secret_access_key, aws_region_name)
+from aws_config import (aws_account_access_key, aws_account_secret_access_key,
+                        aws_region_name)
+from db_config import db_root_url
+from model import PhotoModel
 
 # MongoDB driver for FastAPI
 
@@ -17,12 +14,33 @@ database = client.MRI_Images
 
 collection = database.medical_image
 
-# S3 Bucket Configuration
+# async def create_image_entry(medical_image_):
+#     document = todo
+#     result = await collection.insert_one(document)
+#     return document
 
-aws_session = boto3.Session(
-    aws_access_key_id=aws_account_access_key,
-    aws_secret_access_key=aws_account_secret_access_key,
-    region_name=aws_region_name,
-)
 
-s3 = aws_session.client('s3')
+# async def fetch_one_todo(title):
+#     document = await collection.find_one({"title": title})
+#     return document
+
+
+# async def create_todo(todo):
+#     document = todo
+#     result = await collection.insert_one(document)
+#     return document
+
+
+# async def update_todo(title, desc):
+#     await collection.update_one(
+#         {"title": title},
+#         {"$set": {
+#             "description": desc
+#         }})
+#     document = await collection.find_one({"title": title})
+#     return document
+
+
+# async def remove_todo(title):
+#     await collection.delete_one({"title": title})
+#     return True
