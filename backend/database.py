@@ -10,9 +10,20 @@ from model import PhotoModel
 
 client = motor.motor_asyncio.AsyncIOMotorClient(db_root_url)
 
-database = client.MRI_Images
+database = client.MHI_Images
 
-collection = database.medical_image
+collection = database.medical_images
+
+
+async def create_image_entry(clinician_name, patient_name, image_file_url):
+
+    document = PhotoModel(patient_name=patient_name, clinician_name=clinician_name,
+                          image_file_url=image_file_url, is_deleted=False)
+    print(document)
+
+    result = await collection.insert_one(document.dict())
+
+    return document
 
 # async def create_image_entry(medical_image_):
 #     document = todo

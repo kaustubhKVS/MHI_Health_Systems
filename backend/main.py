@@ -1,11 +1,12 @@
+import uuid
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI, Path, HTTPException, UploadFile
 
 from model import PhotoModel
 
 from image_uploader import image_upload_to_s3
+from database import create_image_entry
 
-import uuid
 
 # App FastAPI object
 app = FastAPI()
@@ -31,16 +32,16 @@ def about():
     return "Few Shot Learning Image Classification Platform Under Construction"
 
 
-@app.post("/api/upload_image/")
-async def post_image(image_file: UploadFile):
-    print("Upload Endpoint Hit")
-    print(image_file.filename)
-    print(image_file.content_type)
-    print(image_file.file)
+@app.post("/api/upload_image/", response_model=PhotoModel)
+async def post_image(image_file: UploadFile, clinician_name: str, patient_name: str):
 
     image_file_content = await image_file.read()
 
-    await image_upload_to_s3(image_file_content, image_file.filename)
+    image_file_url = await image_upload_to_s3(image_file_content, image_file.filename)
+
+    image_information: PhotoModel = await create_image_entry(clinician_name, patient_name, image_file_url)
+
+    return image_information
 
 
 #     1b.png
