@@ -50,13 +50,13 @@ async def post_image(image_file: UploadFile, clinician_id: int , record_id: int,
     return image_information
 
 @app.post("/api/upload_image_test/")
-async def post_image_test(file: bytes = File(...)):
+async def post_image_test(file: UploadFile, dodo: int):
 
-    print(file)
-    buffer = io.BytesIO(file)
-    print(buffer)
-    im = Image.open(buffer)
-    im.show()
+    print(file.filename)
+    # buffer = io.BytesIO(file)
+    # print(buffer)
+    # im = Image.open(file)
+    # im.show()
     
 
 
