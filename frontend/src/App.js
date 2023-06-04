@@ -10,6 +10,7 @@ import Home from "./components/Home";
 import NotFound from "./components/NotFound";
 import ExplorePatients from "./components/ExplorePatients";
 import CreatePrediction from "./components/CreatePrediction";
+import ImageTest from "./components/ImageTest";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route exact path="/" element={<Home />} />
             <Route exact path="/create" element={<CreatePrediction />} />
             <Route exact path="/explore" element={<ExplorePatients />} />
+            <Route exact path="/image_test" element={<ImageTest />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>

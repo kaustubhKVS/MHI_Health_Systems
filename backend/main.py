@@ -1,11 +1,17 @@
 import uuid
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI, Path, HTTPException, UploadFile
+from fastapi import File
 
 from model import PhotoModel
+import io
+
+
 
 from image_uploader import image_upload_to_s3
 from database import create_image_entry
+
+from PIL import Image
 
 
 # App FastAPI object
@@ -42,6 +48,16 @@ async def post_image(image_file: UploadFile, clinician_id: int , record_id: int,
     image_information: PhotoModel = await create_image_entry(clinician_id, patient_id, record_id, image_file_upload_response)
 
     return image_information
+
+@app.post("/api/upload_image_test/")
+async def post_image_test(file: bytes = File(...)):
+
+    print(file)
+    buffer = io.BytesIO(file)
+    print(buffer)
+    im = Image.open(buffer)
+    im.show()
+    
 
 
 #     1b.png

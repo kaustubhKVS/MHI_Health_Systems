@@ -6,8 +6,9 @@ const Navbar = () => {
       <h1>Few Shot Image Processing based EHR</h1>
       <div className="links">
         <Link to="/">Home</Link>
-        <Link to="/create"> Create NFT </Link>
+        <Link to="/create"> Create Prediction </Link>
         <Link to="/explore">Explore</Link>
+        <Link to="/image_test">ImageTest</Link>
       </div>
     </nav>
   );
