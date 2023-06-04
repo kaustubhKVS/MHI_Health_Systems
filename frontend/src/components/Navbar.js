@@ -1,13 +1,13 @@
-import { ReactElement } from "react";
 import { Link } from "react-router-dom";
 
-const Navbar = (): ReactElement => {
+const Navbar = () => {
   return (
     <nav className="navbar">
-      <h1>Resiliant NFT Marketplace</h1>
+      <h1>Few Shot Image Processing based EHR</h1>
       <div className="links">
         <Link to="/">Home</Link>
-        <Link to="/create"> Create Prediction </Link>
+        <Link to="/create"> Create NFT </Link>
+        <Link to="/explore">Explore</Link>
       </div>
     </nav>
   );
