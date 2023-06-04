@@ -15,7 +15,7 @@ const ImageTest = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(" REQUEST STARTS HERE");
+    console.log("REQUEST STARTS HERE");
 
     const formData = new FormData();
     formData.append("image_file", selectedFile, selectedFile.name);

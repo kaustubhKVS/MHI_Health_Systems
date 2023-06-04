@@ -1,14 +1,13 @@
 const ExplorePatients = () => {
   return (
     <div className="explore">
+      <h1>explore</h1>
       {/* {error && <div> {error}</div>} */}
       {/* {isPending && <div> LOADING CONTENT </div>} */}
       {/* {blogs && <BlogList blogs={blogs} title="All Blogs are listed here." />} */}
 
       <img src="https://images-mhi.s3.amazonaws.com/1a0492_hw2_q1_b.png" />
       <img src="https://images-mhi.s3.amazonaws.com/29f52a_ipfs.png" />
-
-      <h1>explore</h1>
     </div>
   );
 };
