@@ -60,3 +60,5 @@ const ImageTest = () => {
 };
 
 export default ImageTest;
+
+// Code AXIOS Snippet from: https://surajsharma.net/blog/react-upload-file-using-axios
