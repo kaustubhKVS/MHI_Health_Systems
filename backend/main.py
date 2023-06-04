@@ -41,24 +41,17 @@ def about():
 @app.post("/api/upload_image/", response_model=PhotoModel)
 async def post_image(image_file: UploadFile, clinician_id: int , record_id: int, patient_id: int):
 
+    print("########### New ENTRY Uploading ##################", image_file.filename, "\n")
+    
     image_file_content = await image_file.read()
 
     image_file_upload_response = await image_upload_to_s3(image_file_content, image_file.filename)
 
     image_information: PhotoModel = await create_image_entry(clinician_id, patient_id, record_id, image_file_upload_response)
 
+    print("########### New ENTRY SUCCESS  ##################")
+        
     return image_information
-
-@app.post("/api/upload_image_test/")
-async def post_image_test(file: UploadFile, dodo: int):
-
-    print(file.filename)
-    # buffer = io.BytesIO(file)
-    # print(buffer)
-    # im = Image.open(file)
-    # im.show()
-    
-
 
 #     1b.png
 # image/png

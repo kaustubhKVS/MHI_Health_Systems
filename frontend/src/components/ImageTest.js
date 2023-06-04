@@ -13,35 +13,27 @@ const ImageTest = () => {
     console.log(e.target.files[0]);
   };
 
-  //   const handleSubmit = (e) => {
-  //     const formData = new FormData();
-  //     formData.append("file", selectedFile, selectedFile.name);
-
-  //     const requestOptions = {
-  //       method: "POST",
-  //       body: formData,
-  //     };
-
-  //     fetch("http://127.0.0.1:8000/api/upload_image_test/", requestOptions).then(
-  //       (response) => {
-  //         console.log(response.json());
-  //       }
-  //     );
-  //   };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("HERE");
+    console.log(" REQUEST STARTS HERE");
+
     const formData = new FormData();
-    formData.append("file", selectedFile, selectedFile.name);
+    formData.append("image_file", selectedFile, selectedFile.name);
+
     console.log(formData);
+
     try {
       const response = await axios({
         method: "POST",
-        url: "http://127.0.0.1:8000/api/upload_image_test/",
-        params: { dodo: "58885" },
+        url: "http://127.0.0.1:8000/api/upload_image/",
+        params: { clinician_id: "55", record_id: "525", patient_id: "598" },
         data: formData,
-        headers: { "Content-Type": "multipart/form-data" },
+        headers: {
+          accept: "application/json",
+          "Content-Type": "multipart/form-data",
+        },
+      }).then((response) => {
+        console.log("REQUEST SUCCESSFUL", response);
       });
     } catch (error) {
       console.log(error);
