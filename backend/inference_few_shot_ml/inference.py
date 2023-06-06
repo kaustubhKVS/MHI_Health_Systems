@@ -5,7 +5,8 @@ from PIL import Image
 
 from inference_few_shot_ml.resnet12_ml_model import resnet12
 
-TRAINED_MODEL_FILE_PATH = "/home/kvshetenex/Desktop/MIH/Project/IMPORTANT_ML_MODULES/res12_best.pth.tar"
+from config_ml import TRAINED_MODEL_FILE_PATH
+
 IMAGE_SIZE = 224
 
 img_size : int = IMAGE_SIZE

@@ -2,9 +2,10 @@ import boto3
 import motor.motor_asyncio
 import uuid
 
-from aws_config import (aws_account_access_key, aws_account_secret_access_key,
+from config_aws import (aws_account_access_key, aws_account_secret_access_key,
                         aws_region_name)
-from db_config import db_root_url
+
+from config_db import db_root_url
 from model import PhotoModel
 
 from random import randint

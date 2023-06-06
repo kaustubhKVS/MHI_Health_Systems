@@ -3,7 +3,7 @@ import uuid
 import boto3
 from boto3.s3.transfer import TransferConfig
 
-from aws_config import (aws_account_access_key, aws_account_secret_access_key,
+from config_aws import (aws_account_access_key, aws_account_secret_access_key,
                         aws_region_name, aws_s3_bucket_name)
 
 aws_session = boto3.Session(
