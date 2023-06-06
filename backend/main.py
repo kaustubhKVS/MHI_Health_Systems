@@ -8,7 +8,7 @@ import io
 
 
 
-from aws_image_handler.image_uploader import image_upload_to_s3
+from aws_image_handler.image_handler import (image_upload_to_s3, image_download_from_s3_into_io_buffer)
 from database.database import create_image_entry
 from inference_few_shot_ml.inference import get_fsm_prediction
 
@@ -54,8 +54,8 @@ async def post_image(image_file: UploadFile, clinician_id: int , record_id: int,
         
     return image_information
 
-@app.post("/api/get_prediction/")
-async def post_image(image_file: UploadFile):
+@app.post("/api/get_prediction_from_file/")
+async def post_image_pred_by_file(image_file: UploadFile):
 
     print("########### PREDICTION IN PROGRESS  ##################", image_file.filename, "\n")
     
@@ -67,9 +67,15 @@ async def post_image(image_file: UploadFile):
         
     return predicted_label
 
-#     1b.png
-# image/png
-# <tempfile.SpooledTemporaryFile object at 0x7f16bc076080 >
-    # if response:
-    #     return response
-    # raise HTTPException(400, "Something went wrong/ Bad Request")
+@app.post("/api/get_prediction_from_aws/")
+async def post_image_by_aws(image_key: str):
+
+    print("########### AwS PREDICTION IN PROGRESS  ##################", "\n")
+    
+    image_file_content = await image_download_from_s3_into_io_buffer(image_key)
+    
+    predicted_label = await get_fsm_prediction(image_file_content.getvalue())
+
+    print("########### AwS PREDICTION SUCCESSFUL  ##################")
+        
+    return predicted_label
