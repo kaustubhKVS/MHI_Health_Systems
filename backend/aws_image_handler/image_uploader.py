@@ -36,5 +36,3 @@ async def image_upload_to_s3(file_content: bytes, image_file_name: str):
     uploaded_file_url = f"https://{aws_s3_bucket_name}.s3.amazonaws.com/{image_file_name}"
 
     return {"uploaded_file_url": uploaded_file_url, "image_name_key" : image_file_name}
-
-

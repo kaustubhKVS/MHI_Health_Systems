@@ -8,8 +8,8 @@ import io
 
 
 
-from image_uploader import image_upload_to_s3
-from database import create_image_entry
+from aws_image_handler.image_uploader import image_upload_to_s3
+from database.database import create_image_entry
 from inference_few_shot_ml.inference import get_fsm_prediction
 
 from PIL import Image
