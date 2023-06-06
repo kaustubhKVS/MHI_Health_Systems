@@ -10,6 +10,7 @@ import io
 
 from image_uploader import image_upload_to_s3
 from database import create_image_entry
+from inference_few_shot_ml.inference import get_fsm_prediction
 
 from PIL import Image
 
@@ -52,6 +53,19 @@ async def post_image(image_file: UploadFile, clinician_id: int , record_id: int,
     print("########### New ENTRY SUCCESS  ##################")
         
     return image_information
+
+@app.post("/api/get_prediction/")
+async def post_image(image_file: UploadFile):
+
+    print("########### PREDICTION IN PROGRESS  ##################", image_file.filename, "\n")
+    
+    image_file_content = await image_file.read()
+    
+    predicted_label = await get_fsm_prediction(image_file_content)
+
+    print("########### PREDICTION SUCCESSFUL  ##################")
+        
+    return predicted_label
 
 #     1b.png
 # image/png
