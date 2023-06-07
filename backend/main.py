@@ -14,6 +14,8 @@ from inference_few_shot_ml.inference import get_fsm_prediction
 from training_few_shot_ml.aws_image_manager.aws_image_disease_s3_manager import train_image_upload_to_s3
 from training_few_shot_ml.train_session import train_data_session
 
+from database.EHR_database.ehr_data_fetch import get_patient_data
+
 from PIL import Image
 
 
@@ -103,3 +105,12 @@ async def fetch_image_to_train_s3(train_job : int):
     await train_data_session(train_job)
     
     return "SUCCESS"
+
+@app.get("/api/fetch_patient_info_by_id/")
+async def fetch_patient_info_by_id(patient_id : int):
+
+    print("########### Patient ID DATA AwS New ENTRY Started ##################", "\n")
+    
+    patient_data = get_patient_data(patient_id)
+    
+    return patient_data

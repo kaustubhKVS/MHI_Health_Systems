@@ -22,8 +22,6 @@ config = TransferConfig(
 
 s3 = aws_session.client('s3')
 
-
-
 async def image_upload_to_s3(file_content: bytes, image_file_name: str):
 
     key_for_file = str(uuid.uuid4().hex[:6])
