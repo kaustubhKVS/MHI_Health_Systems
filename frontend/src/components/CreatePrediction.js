@@ -5,11 +5,6 @@ import axios from "axios";
 import Button from "@material-ui/core/Button";
 import ImageLabel from "./ImageLabel";
 
-// figure out conditional rendering
-// make backend changes so that you get the file url as response while making predictions
-// make file and submit components
-// make a image and label component
-
 const CreatePrediction = () => {
   const backend_post_url =
     "http://127.0.0.1:8000/api/get_prediction_from_file/";
@@ -23,15 +18,15 @@ const CreatePrediction = () => {
 
   const [predictedLabel, setPredictedLabel] = useState("");
 
+  useEffect(() => {
+    console.log("EFFECT LABEL", predictedLabel);
+  }, [predictedLabel]);
+
   const fileChangeHandler = (e) => {
     setSelectedFile(e.target.files[0]);
     setimageURL(URL.createObjectURL(e.target.files[0]));
     console.log(e.target.files[0]);
   };
-
-  useEffect(() => {
-    console.log("EFFECT LABEL", predictedLabel);
-  }, [predictedLabel]);
 
   const handleSubmit = (e) => {
     setIsLoading(true);
