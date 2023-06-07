@@ -12,9 +12,9 @@ const ImageLabel = (props) => {
 
   var label = props.ImageLabel;
   return (
-    <div className="image_label">
-      <img src={props.imageURL} />
-      <h1>Label is : {predictedLabel}</h1>
+    <div className="image_label" style={{ padding: 50 }}>
+      <img src={props.imageURL} style={{ width: 500, height: 600 }} />
+      <h1>Label is : {props.predictedLabel}</h1>
     </div>
   );
 };

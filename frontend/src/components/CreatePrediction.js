@@ -11,16 +11,17 @@ import ImageLabel from "./ImageLabel";
 // make a image and label component
 
 const CreatePrediction = () => {
-  const backend_post_url = "http://127.0.0.1:8000/api/create_nft/";
+  const backend_post_url =
+    "http://127.0.0.1:8000/api/get_prediction_from_file/";
+
+  var label = null;
 
   const [isTxPending, setTxPending] = useState(true);
-  const [isPending, setIsPending] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [imageURL, setimageURL] = useState(
-    "https://images-mhi.s3.amazonaws.com/1a0492_hw2_q1_b.png"
-  );
-  const [predictedLabel, setPredictedLabel] = useState("Linux");
+  const [imageURL, setimageURL] = useState("");
+
+  const [predictedLabel, setPredictedLabel] = useState("");
 
   const fileChangeHandler = (e) => {
     setSelectedFile(e.target.files[0]);
@@ -28,17 +29,35 @@ const CreatePrediction = () => {
     console.log(e.target.files[0]);
   };
 
-  const navigate = useNavigate();
+  useEffect(() => {
+    console.log("EFFECT LABEL", predictedLabel);
+  }, [predictedLabel]);
 
   const handleSubmit = (e) => {
-    // e.preventDefault();
-    console.log("here");
+    setIsLoading(true);
+    const formData = new FormData();
+    formData.append("image_file", selectedFile, selectedFile.name);
 
-    console.log("REQUEST STARTS HERE");
+    try {
+      const response = axios({
+        method: "POST",
+        url: backend_post_url,
+        data: formData,
+        headers: {
+          accept: "application/json",
+          "Content-Type": "multipart/form-data",
+        },
+      }).then((response) => {
+        label = response.data;
+        setPredictedLabel(label);
+        console.log("REQUEST SUCCESSFUL LABEL IS", predictedLabel);
+      });
+    } catch (error) {
+      console.log(error);
+    }
 
-    // setimageURL(URL.createObjectURL(e.target.files[0]));
-    setPredictedLabel("Linux");
     console.log(imageURL, predictedLabel);
+    setIsLoading(false);
     setTxPending(false);
   };
 
@@ -54,17 +73,21 @@ const CreatePrediction = () => {
           />
         </Button>
 
-        <Button
-          variant="contained"
-          color="secondary"
-          style={{ backgroundColor: "#368BC2 ", color: "#ffffff" }}
-          onClick={() => {
-            handleSubmit();
-          }}
-        >
-          Make Prediction
-        </Button>
+        {!isLoading && (
+          <Button
+            variant="contained"
+            color="secondary"
+            style={{ backgroundColor: "#368BC2 ", color: "#ffffff" }}
+            onClick={() => {
+              handleSubmit();
+            }}
+          >
+            Make Prediction
+          </Button>
+        )}
       </div>
+
+      {isLoading && <h1> Loading Prediction </h1>}
 
       {!isTxPending && (
         <div className="transaction_reciept">
