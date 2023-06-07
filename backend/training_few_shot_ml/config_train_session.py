@@ -1,0 +1,1 @@
+TRAIN_DATASET_PATH = "/home/kvshetenex/Desktop/MIH/Project/MHI_Health_Systems/backend/training_few_shot_ml/mock_dataset"
