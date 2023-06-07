@@ -7,6 +7,8 @@ const ImageTest = () => {
   const [isSelected, setIsSelected] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploadSuccessful, setUploadSuccessful] = useState(false);
+  const [imageURL, setimageURL] = useState("");
+  const [predictedLabel, setPredictedLabel] = useState("");
 
   const fileChangeHandler = (e) => {
     setSelectedFile(e.target.files[0]);

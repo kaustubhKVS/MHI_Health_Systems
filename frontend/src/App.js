@@ -23,6 +23,7 @@ function App() {
             <Route exact path="/create" element={<CreatePrediction />} />
             <Route exact path="/explore" element={<ExplorePatients />} />
             <Route exact path="/image_test" element={<ImageTest />} />
+            {/* <Route exact path="/explore_patient" element={<ImageTest />} /> */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
