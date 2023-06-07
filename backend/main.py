@@ -11,6 +11,8 @@ import io
 from aws_image_handler.image_handler import (image_upload_to_s3, image_download_from_s3_into_io_buffer)
 from database.database import create_image_entry
 from inference_few_shot_ml.inference import get_fsm_prediction
+from training_few_shot_ml.aws_image_manager.aws_image_disease_s3_manager import train_image_upload_to_s3
+from training_few_shot_ml.train_session import train_data_session
 
 from PIL import Image
 
@@ -79,3 +81,25 @@ async def post_image_by_aws(image_key: str):
     print("########### AwS PREDICTION SUCCESSFUL  ##################")
         
     return predicted_label
+
+@app.post("/api/upload_image_s3_training/")
+async def post_image_to_train_s3(image_file: UploadFile, disease_name : str, train_job : int):
+
+    print("########### TRAINING DATA AwS New ENTRY Uploading ##################", image_file.filename, "\n")
+    
+    image_file_content = await image_file.read()
+
+    image_file_upload_response = await train_image_upload_to_s3(image_file_content, image_file.filename, disease_name=disease_name, train_job=train_job)
+
+    print("########### TRAINING DATA AwS New ENTRY SUCCESS  ##################")
+        
+    return image_file_upload_response
+
+@app.get("/api/fetch_image_s3_training/")
+async def fetch_image_to_train_s3(train_job : int):
+
+    print("########### TRAINING DATA AwS New ENTRY Started ##################", "\n")
+    
+    await train_data_session(train_job)
+    
+    return "SUCCESS"
