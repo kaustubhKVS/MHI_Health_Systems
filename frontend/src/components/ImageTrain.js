@@ -1,21 +1,22 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Button from "@material-ui/core/Button";
+
 import axios from "axios";
 
-import Button from "@material-ui/core/Button";
-import ImageLabel from "./ImageLabel";
-
-const CreatePrediction = () => {
+const ImageTrain = () => {
   const backend_post_url =
-    "http://127.0.0.1:8000/api/get_prediction_from_file/";
+    "http://127.0.0.1:8000/api/upload_image_s3_training/";
 
   var label = null;
 
   const [isTxPending, setTxPending] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
-  const [imageURL, setimageURL] = useState("");
 
+  const [imageURL, setimageURL] = useState("");
+  const [diseaseName, setDiseaseName] = useState("");
+  const [trainJob, setTrainJob] = useState("");
   const [predictedLabel, setPredictedLabel] = useState("");
 
   useEffect(() => {
@@ -42,23 +43,31 @@ const CreatePrediction = () => {
           accept: "application/json",
           "Content-Type": "multipart/form-data",
         },
+        params: {
+          disease_name: diseaseName,
+          train_job: trainJob,
+        },
       }).then((response) => {
         label = response.data;
         setPredictedLabel(label);
         console.log("REQUEST SUCCESSFUL LABEL IS", predictedLabel);
+        console.log(
+          "URL SUCCESSFUL LABEL IS",
+          predictedLabel.uploaded_file_url
+        );
       });
     } catch (error) {
       console.log(error);
     }
 
-    console.log(imageURL, predictedLabel);
+    console.log("#############", imageURL, predictedLabel);
     setIsLoading(false);
     setTxPending(false);
   };
 
   return (
     <div className="create_prediction_local">
-      <div className="upload_file">
+      <div className="upload_file" style={{ width: "500px" }}>
         <Button variant="contained" component="label">
           <input
             type="file"
@@ -67,7 +76,22 @@ const CreatePrediction = () => {
             type="file"
           />
         </Button>
-        <input type="number" required placeholder="PATIENT ID" />
+
+        <input
+          type="text"
+          required
+          placeholder="DISEASE NAME"
+          value={diseaseName}
+          onChange={(e) => setDiseaseName(e.target.value)}
+        />
+
+        <input
+          type="number"
+          required
+          placeholder="TRAIN JOB NUMBER"
+          value={trainJob}
+          onChange={(e) => setTrainJob(e.target.value)}
+        />
 
         {!isLoading && (
           <Button
@@ -78,7 +102,7 @@ const CreatePrediction = () => {
               handleSubmit();
             }}
           >
-            Make Prediction
+            Upload Image to S3
           </Button>
         )}
       </div>
@@ -87,19 +111,22 @@ const CreatePrediction = () => {
 
       {!isTxPending && (
         <div className="transaction_reciept">
-          <ImageLabel
-            imageURL={imageURL}
-            predictedLabel={predictedLabel}
-          ></ImageLabel>
-          {!(predictedLabel == "Normal") && (
-            <h2 style={{ color: "white", backgroundColor: "red" }}>
-              SEVERITY DETECTED BY AI ENGINE
-            </h2>
-          )}
+          <h2 style={{ color: "green" }}> IMAGE SUCESSFULLY UPLOADED </h2>
+          <h2> IMAGE IS IN TRAINING JOB : {trainJob} </h2>
+          <h5 style={{ color: "red" }}>
+            {" "}
+            IMAGE LOCATION IN CLOUD : {predictedLabel.uploaded_file_url}{" "}
+          </h5>
+          <img
+            src={predictedLabel.uploaded_file_url}
+            style={{ width: 500, height: 600 }}
+          ></img>
         </div>
       )}
     </div>
   );
 };
 
-export default CreatePrediction;
+export default ImageTrain;
+
+// Code AXIOS Snippet from: https://surajsharma.net/blog/react-upload-file-using-axios

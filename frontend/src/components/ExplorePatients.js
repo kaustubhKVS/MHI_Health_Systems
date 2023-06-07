@@ -36,12 +36,13 @@ const ExplorePatients = () => {
 
   return (
     <div className="explore">
-      <h1>Patient Information Panel</h1>
+      <h1>Patient Information Retrieval Panel</h1>
 
       <div className="search_bar" style={{ width: 550 }}>
         <input
           type="number"
           required
+          placeholder="PATIENT ID"
           value={patientID}
           onChange={(e) => setPatientID(e.target.value)}
         />

@@ -153,6 +153,9 @@ const PatientCard = (props) => {
           <h2 style={{ textAlign: "left", color: "red", fill: "Highlight" }}>
             ALERT LIVE DEVICE PRESENT
           </h2>
+          <h2 style={{ color: "white", backgroundColor: "red" }}>
+            SEVERITY DETECTED
+          </h2>
 
           <div
             className="patient_info_card"
