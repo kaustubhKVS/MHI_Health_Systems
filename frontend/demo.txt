@@ -1,0 +1,6 @@
+Emphysema
+Emphysema
+Fibrosis
+Consolidation
+Pleural_Thickening
+Cardiomegaly

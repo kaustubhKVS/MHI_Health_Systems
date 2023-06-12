@@ -4,9 +4,9 @@ Backend of Few-Shot Learning based Prediction platform is developed using [FastA
 
 ## Available Scripts
 
-### ResDB URI Setup
+### URI Setup
 
-Set the URL of the hosted ResDB Instance in `db_config.py`
+Set the URL of the hosted directories Instance in `db_config.py`
 
 ### FastAPI Development Server Setup
 
@@ -14,7 +14,7 @@ To run the development server with hot-reload:
 
 #### `conda activate mhi_few_shot`
 
-#### `uvicorn test:app --reload`
+#### `uvicorn main:app --reload`
 
 #### `sudo systemctl start mongod`
 
